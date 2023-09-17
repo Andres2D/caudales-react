@@ -28,10 +28,10 @@ interface Intervals {
   second: number;
 }
 
-interface YearAvg {
-  month: number;
-  value: number;
-}
+// interface YearAvg {
+//   month: number;
+//   value: number;
+// }
 
 const First = () => {
 
@@ -78,18 +78,18 @@ const First = () => {
     }) 
   });
 
-  const standardPerYear: YearAvg[] = [];
+  // const standardPerYear: YearAvg[] = [];
 
-  avgPerMonth.forEach((context) => {
-    const value = (context.sum - context.average) / desviacionConstants[context.month - 1];
-    standardPerYear.push({
-      month: context.month,
-      value
-    });
-  });
+  // avgPerMonth.forEach((context) => {
+  //   const value = (context.sum - context.average) / desviacionConstants[context.month - 1];
+  //   standardPerYear.push({
+  //     month: context.month,
+  //     value
+  //   });
+  // });
 
-  console.log(avgPerMonth);
-  console.log(standardPerYear);
+  // console.log(avgPerMonth);
+  // console.log(standardPerYear);
 
   const averagePerYear: AveragePerYear[] = [];
 
