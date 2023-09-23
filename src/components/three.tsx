@@ -105,6 +105,7 @@ export const Three = () => {
   caudalesDB.forEach(caudal => {
     const month = new Date(caudal.date).getMonth() + 1;
     const year = new Date(caudal.date).getFullYear();
+    // console.log(year, month);
     const restaCaudales = (caudal.caudal - avgPerMonth.filter( a => a.month === month)[0].average) / desviacionConstants[month - 1];
     groupPerMonth.push({
       month,

@@ -125,6 +125,14 @@ const Second = () => {
     });
   });
 
+  // console.table(groupPerMonth.map(a => {
+  //  return {
+  //    valor: Number(a.value.toFixed(2)),
+  //    year: a.year,
+  //    month: a.month
+  //  } 
+  // }));
+
   let groupedPerMonth: GroupedPerMonth[] = [];
 
   monthsList.forEach((month) => {
@@ -142,6 +150,8 @@ const Second = () => {
       avg: sumMonth / numMonths,
     });
   });
+
+  // console.log(groupedPerMonth);
 
   groupedPerMonth = groupedPerMonth.sort((a,b) => {
     if(a.month > b.month) {

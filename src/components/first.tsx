@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { caudalesDB, desviacionConstants } from '../data/caudales';
+import { caudalesDB } from '../data/caudales';
 import styles from './first.module.scss';
 import {
   Chart as ChartJS,
@@ -56,7 +56,7 @@ const First = () => {
       },
     },
   };
-  
+
   const yearsList = new Set(
     caudalesDB.map((year) => new Date(year.date).getFullYear())
   );
@@ -65,18 +65,27 @@ const First = () => {
     caudalesDB.map((month) => new Date(month.date).getMonth() + 1)
   );
 
-  const avgPerMonth: AveragePerMonth[] = [];
+  // const avgPerMonth: AveragePerMonth[] = [];
 
-  monthsList.forEach(month => {
-    const caudalesPerMonth = caudalesDB.filter(a => new Date(a.date).getMonth() + 1 === month);
-    const caudalesValues = caudalesPerMonth.map(a => a.caudal);
-    // console.log(month, caudalesValues);
-    avgPerMonth.push({
+  const monthsFilter = [...monthsList].map(month => {
+    const caudalesPerMonth = caudalesDB.filter(a => new Date(a.date).getMonth() + 1 === month).map(a => a.caudal);
+    return {
       month,
-      average: caudalesValues.reduce((a,b) => a+b) / caudalesValues.length,
-      sum: caudalesValues.reduce((a,b) => a+b)
-    }) 
+      caudalesPerMonth: caudalesPerMonth.join(',')
+    }
   });
+
+  // console.log(monthsFilter);
+
+  // const discMonths = [...monthsList].map(month => {
+  //   const caudales = caudalesDB.filter(a => new Date(a.date).getMonth() + 1 === month);
+  //   return {
+  //     month,
+  //     caudales
+  //   }
+  // });
+
+  // console.log(discMonths.forEach( a => console.table(a.caudales)));
 
   // const standardPerYear: YearAvg[] = [];
 
@@ -104,7 +113,12 @@ const First = () => {
     });
   });
 
-  // const maxCaudalValue = Math.max(...caudalesDB.map((caudal) => caudal.caudal));
+  const maxCaudalValue = Math.max(...caudalesDB.map((caudal) => caudal.caudal));
+  const minCaudalValue = Math.min(...caudalesDB.map((caudal) => caudal.caudal));
+
+  // console.log('MAX: ', maxCaudalValue);
+  // console.log('MIN: ', minCaudalValue);
+
   const caudalesList = caudalesDB.map(a => a.caudal);
   const caudalesAverage = caudalesList.reduce((a,b) => a+b) / caudalesList.length;
   // const sumCaudales = caudalesList.reduce((a,b) => (a + b - caudalesAverage));
@@ -118,14 +132,14 @@ const First = () => {
   // console.log('Coeficiente de fisher', 1.42);
   // console.log(caudalesDB.map(a => a.caudal).join(', '))
 
-  const intervals = 0.13753;
+  const intervals = 0.1297;
   const intervalsList: Intervals[] = []
 
   Array.from({length: 30}).forEach((_, i) => {
     intervalsList.push(
-      { 
+      {
         first: intervals * (i + 1),
-        second: (intervals * (i + 1)) + intervals 
+        second: (intervals * (i + 1)) + intervals
       }
     )
   });
@@ -152,7 +166,7 @@ const First = () => {
     classMarks.push(Number(classMark));
 
     accumulatedFrequency.push(totalAbsolute.reduce((a,b) => a+b));
-    const absoluteFrequencyPercentage = (absoluteFrequencyCounter / 361) * 100;
+    const absoluteFrequencyPercentage = (absoluteFrequencyCounter / 372) * 100;
     totalAccumulatedFrequencyPercentage.push(absoluteFrequencyPercentage);
     const accumulatedFrequencyPercentage = totalAccumulatedFrequencyPercentage.reduce((a,b) => a+b);
     accumulatedFrequencyPercentageList.push(accumulatedFrequencyPercentage);
@@ -181,16 +195,34 @@ const First = () => {
     ],
   };
 
+
   const dataSecond = {
     labels: classMarks.map(a => String(a)),
     datasets: [
       {
-        label: 'Función de deistribución de probabilidad acumulada',
+        label: 'Función de distribución de probabilidad acumulada',
         data: accumulatedFrequencyPercentageList,
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       }
     ],
   };
+
+  // const monthsToCalculate = [0,1,2,3,4,5,6,7,8];
+
+  // const filterMonths = monthsToCalculate.map(month => {
+  //   const caudalesMonths = caudalesDB.map(a => { return { month: new Date(a.date).getMonth(), value: a.caudal}});
+  //   const sumMonths = caudalesMonths.filter(a => a.month === month);
+  //   const avgMonths = sumMonths.map(a => a.value).reduce((a,b) => a+b) / sumMonths.length;
+  //   return {
+  //     date: `${month+1}/1/1980 00:00`,
+  //     caudal: avgMonths
+  //   }
+  // });
+
+  // console.log(filterMonths);
+
+  // const dbComplete = caudalesDB.map(a => a.caudal).join(', ');
+  // console.log(dbComplete);
 
   return (
     <>
