@@ -35,21 +35,74 @@ const Four = () => {
   const girl: number[] = [];
   const neutral: number[] = [];
 
+  const years = [
+    1980,
+    1981,
+    1982,
+    1983,
+    1984,
+    1985,
+    1986,
+    1987,
+    1988,
+    1989,
+    1990,
+    1991,
+    1992,
+    1993,
+    1994,
+    1995,
+    1996,
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010
+];
+
+
   ONIPerMonth.forEach((val, index) => {
 
     const boy: number[] = [];
     const girl: number[] = [];
     const neutral: number[] = [];
 
-    val.oni.forEach(oni => {
-      if(oni <= -0.5) {
-        girl.push(oni);
-      }else if(oni > -0.5 && oni <= 0.5) {
-        neutral.push(oni);
-      }else if(oni > 0.5){
-        boy.push(oni);
+    val.oni.forEach((oni, idx) => {
+      if(val.month < 7) {
+        if(oni < -0.5) {
+          const caudales = caudalesDB.filter(a => new Date(a.date).getFullYear() === years[idx] && new Date(a.date).getMonth() + 1 === val.month);
+          girl.push({oni: oni, year: years[idx], month: val.month, caudal: caudales[0].caudal});
+        }else if(oni >= -0.5 && oni < 0.5) {
+          const caudales = caudalesDB.filter(a => new Date(a.date).getFullYear() === years[idx] && new Date(a.date).getMonth() + 1 === val.month);
+          neutral.push({oni: oni, year: years[idx], month: val.month, caudal: caudales[0].caudal });
+        }else if(oni >= 0.5){
+          const caudales = caudalesDB.filter(a => new Date(a.date).getFullYear() === years[idx] && new Date(a.date).getMonth() + 1 === val.month);
+          boy.push({oni: oni, year: years[idx], month: val.month, caudal: caudales[0].caudal });
+        }else {
+          console.log('WTF: ', oni);
+        }
       }else {
-        console.log('WTF: ', oni);
+        if(oni <= -0.5) {
+          const caudales = caudalesDB.filter(a => new Date(a.date).getFullYear() === years[idx] && new Date(a.date).getMonth() + 1 === val.month);
+          girl.push({oni: oni, year: years[idx], month: val.month, caudal: caudales[0].caudal });
+        }else if(oni > -0.5 && oni < 0.5) {
+          const caudales = caudalesDB.filter(a => new Date(a.date).getFullYear() === years[idx] && new Date(a.date).getMonth() + 1 === val.month);
+          neutral.push({oni: oni, year: years[idx], month: val.month, caudal: caudales[0].caudal });
+        }else if(oni >= 0.5){
+          const caudales = caudalesDB.filter(a => new Date(a.date).getFullYear() === years[idx] && new Date(a.date).getMonth() + 1 === val.month);
+          boy.push({oni: oni, year: years[idx], month: val.month, caudal: caudales[0].caudal });
+        }else {
+          console.log('WTF: ', oni);
+        }
       }
     });
 
@@ -57,6 +110,17 @@ const Four = () => {
     ONIPerMonth[index].girl = girl;
     ONIPerMonth[index].neutral = neutral;
   });
+
+  const mappedData = ONIPerMonth.map(a => {
+    return {
+      month: a.month,
+      boy: a.boy.map(b => b.caudal).join(','),
+      girl: a.girl.map(c => c.caudal).join(','),
+      neutral: a.neutral.map(d => d.caudal).join(',')
+    }
+  });
+
+  mappedData.forEach(a => console.table(a));
 
   const boyDetailed: any[] = [];
   const girlDetailed: any[] = [];
@@ -67,43 +131,81 @@ const Four = () => {
   const neutralDetailedTwo: any[] = [];
 
   ONIValues.forEach((val) => {
-
     val.values.forEach((oni, idx) => {
-      if(oni <= -0.5) {
-        const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
-        if(caudal[0]?.caudal) {
-          girlDetailed.push(caudal[0].caudal);
-          girlDetailedTwo.push({
-            caudal: caudal[0].caudal,
-            month: idx + 1
-          });
+      if(idx < 6) {
+        if(oni < -0.5) {
+          const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
+          if(caudal[0]?.caudal) {
+            girlDetailed.push(caudal[0].caudal);
+            girlDetailedTwo.push({
+              caudal: caudal[0].caudal,
+              month: idx + 1
+            });
+          }else {
+            console.log('Falta: ', val.year, idx)
+          }
+        }else if(oni >= -0.5 && oni < 0.5) {
+          const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
+          if(caudal[0]?.caudal) {
+            neutralDetailed.push(caudal[0].caudal);
+            neutralDetailedTwo.push({
+              caudal: caudal[0].caudal,
+              month: idx + 1
+            });
+          }else {
+            console.log('Falta: ', val.year, idx)
+          }
+        }else if(oni > 0.5){
+          const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
+          if(caudal[0]?.caudal) {
+            boyDetailed.push(caudal[0].caudal);
+            boyDetailedTwo.push({
+              caudal: caudal[0].caudal,
+              month: idx + 1
+            });
+          }else {
+            console.log('Falta: ', val.year, idx)
+          }
         }else {
-          console.log('Falta: ', val.year, idx)
-        }
-      }else if(oni > -0.5 && oni <= 0.5) {
-        const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
-        if(caudal[0]?.caudal) {
-          neutralDetailed.push(caudal[0].caudal);
-          neutralDetailedTwo.push({
-            caudal: caudal[0].caudal,
-            month: idx + 1
-          });
-        }else {
-          console.log('Falta: ', val.year, idx)
-        }
-      }else if(oni > 0.5){
-        const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
-        if(caudal[0]?.caudal) {
-          boyDetailed.push(caudal[0].caudal);
-          boyDetailedTwo.push({
-            caudal: caudal[0].caudal,
-            month: idx + 1
-          });
-        }else {
-          console.log('Falta: ', val.year, idx)
+          console.log('WTF: ', oni);
         }
       }else {
-        console.log('WTF: ', oni);
+        if(oni <= -0.5) {
+          const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
+          if(caudal[0]?.caudal) {
+            girlDetailed.push(caudal[0].caudal);
+            girlDetailedTwo.push({
+              caudal: caudal[0].caudal,
+              month: idx + 1
+            });
+          }else {
+            console.log('Falta: ', val.year, idx)
+          }
+        }else if(oni > -0.5 && oni < 0.5) {
+          const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
+          if(caudal[0]?.caudal) {
+            neutralDetailed.push(caudal[0].caudal);
+            neutralDetailedTwo.push({
+              caudal: caudal[0].caudal,
+              month: idx + 1
+            });
+          }else {
+            console.log('Falta: ', val.year, idx)
+          }
+        }else if(oni >= 0.5){
+          const caudal = caudalesDB.filter(a => new Date(a.date).getMonth() === idx && new Date(a.date).getFullYear() === val.year);
+          if(caudal[0]?.caudal) {
+            boyDetailed.push(caudal[0].caudal);
+            boyDetailedTwo.push({
+              caudal: caudal[0].caudal,
+              month: idx + 1
+            });
+          }else {
+            console.log('Falta: ', val.year, idx)
+          }
+        }else {
+          console.log('WTF: ', oni);
+        }
       }
     });
   });
@@ -181,9 +283,6 @@ const Four = () => {
       </tr>
     )
   });
-
-  console.log('Max: ', Math.max(...caudales));
-  console.log('Min: ', Math.min(...caudales));
 
   const dataFirst = {
     labels: classMarks.map(a => String(a)),

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const caudalesDB = [
   {
     date: '1/1/1980 00:00',
@@ -1984,16 +1985,16 @@ export const NAOConstants = [
 export interface ONIDiscriminated {
   oni: number[];
   month: number;
-  boy: number[];
-  girl: number[];
-  neutral: number[];
+  boy: any[];
+  girl: any[];
+  neutral: any[];
 }
 
 export const ONIPerMonth: ONIDiscriminated[] = [
   {
     oni: [
       0.6, -0.3, 0, 2.2, -0.6, -1, -0.5, 1.2, 0.8, -1.7, 0.1, 0.4, 1.7, 0.1, 0.1, 1,
-      -0.9, -0.5, 2.2, -1.5, -1.7, -0.7, -0.1, 0.9, 0.4, 0.6, -0.9, 0.7, -1.6,
+      -0.9, -0.5, 2.2, -1.5, -1.7, -0.7, -0.1, 0.9, 0.4, 0.6, -0.9, 0.7, -1.6, -0.8,
       1.5,
     ],
     month: 1,
@@ -2004,7 +2005,7 @@ export const ONIPerMonth: ONIDiscriminated[] = [
   {
     oni: [
       0.5, -0.5, 0.1, 1.9, -0.4, -0.8, -0.5, 1.2, 0.5, -1.4, 0.2, 0.3, 1.6, 0.3, 0.1,
-      0.7, -0.8, -0.4, 1.9, -1.3, -1.4, -0.5, 0, 0.6, 0.3, 0.6, -0.8, 0.2, -1.5,
+      0.7, -0.8, -0.4, 1.9, -1.3, -1.4, -0.5, 0, 0.6, 0.3, 0.6, -0.8, 0.2, -1.5, -0.8,
       1.2,
     ],
     month: 2,
