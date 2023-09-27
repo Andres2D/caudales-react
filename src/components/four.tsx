@@ -222,10 +222,10 @@ const Four = () => {
     })
   });
 
-  const intervals = 0.10415;
+  const intervals = 0.07226;
   const intervalsList: Intervals[] = []
 
-  Array.from({length: 20}).forEach((_, i) => {
+  Array.from({length: 30}).forEach((_, i) => {
     intervalsList.push(
       {
         first: intervals * (i + 1),
@@ -301,7 +301,7 @@ const Four = () => {
         <tr>
           <th>Intervalos</th>
           <th>Marca de clase xi</th>
-          <th>Frecuencia absoluta girl</th>
+          <th>Frecuencia absoluta</th>
         </tr>
         { intervalsMap }
       </table>
