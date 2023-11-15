@@ -1,22 +1,22 @@
-*** Tarea N.1 ***
+Tarea N.1
 Hidrología
 
 
-*** Presentado por: ***
+Presentado por: 
  
 Ana Maria Higuita Castaño
 1000207654
 
 
-*** Docente: ***
+Docente: 
 Germán Poveda Jaramillo
 
-*** Monitor: ***
+Monitor: 
 Andres Felipe Caicedo Urbano
 
-*** Universidad Nacional de Colombia sede Medellín ***
+Universidad Nacional de Colombia sede Medellín 
 
-*** Facultad de Minas ***
+Facultad de Minas 
 
 2023
 
