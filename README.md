@@ -1,27 +1,26 @@
-# React + TypeScript + Vite
+*** Tarea N.1 ***
+Hidrología
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+*** Presentado por: ***
+ 
+Ana Maria Higuita Castaño
+1000207654
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+*** Docente: ***
+Germán Poveda Jaramillo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+*** Monitor: ***
+Andres Felipe Caicedo Urbano
 
-- Configure the top-level `parserOptions` property like this:
+*** Universidad Nacional de Colombia sede Medellín ***
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+*** Facultad de Minas ***
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2023
+
+Para desarrollar el presente proyecto se contó con una serie de caudales promedios mensuales, con los cuales se evaluará su distribución, estadísticos y posibles relaciones con fenómenos globales. 
+Para visualizar la distribución de los caudales en 30 intervalos de clase,se representará graficamente en un histograma de frecuencias asi como una función de distribución de probabilidades acumulada 
+Adicionalmente se analizará el ciclo anual de caudales promedios mensuales para identificar patrones y tendencias a los largo del año hidrológico
+Por otro lado, se pretende estudiar la estandarización de los caudales promedios mensuales para evaluar su comportamiento relativo en relación con los índices climáticos como El Niño Oscilación del Sur (ENSO), la Oscilación Decadal del Pacífico (PDO) y el Oscilación del Atlántico Norte (NAO). Esta comparación permite examinar posibles vínculos entre las fluctuaciones de los caudales y los patrones climáticos globales.
